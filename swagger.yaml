@@ -1,118 +1,146 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  description: This is the notskype QDB server.
-  version: 1.0.0
-  title: notskype qdb
-host: qdb.esports.moe
-basePath: /api/v1
+  description: "This is the notskype QDB server."
+  version: "1.0.0"
+  title: "notskype qdb"
+host: "qdb.esports.moe"
+basePath: "/api/v1"
 tags:
-  - name: quote
-    description: A quote
+- name: "quote"
+  description: "A quote"
 schemes:
-  - https
+- "https"
 paths:
   /quote:
+    get:
+      tags:
+      - "quote"
+      summary: "Get a list of quotes in reverse chronological order"
+      operationId: "listQuotes"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "count"
+        description: "Number of quotes to fetch"
+        type: "number"
+        format: "int32"
+        default: 10
+      - in: "query"
+        name: "offset"
+        description: "Number of quotes to skip"
+        type: "number"
+        format: "int32"
+        default: 0
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Quote"
+        400:
+          description: "Invalid count or offset"
     post:
       tags:
-        - quote
-      summary: Add a new quote to the database
-      description: ''
-      operationId: addQuote
+      - "quote"
+      summary: "Add a new quote to the database"
+      operationId: "addQuote"
       consumes:
-        - application/json
+      - "application/json"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - in: body
-          name: body
-          description: Quote body to be added to the database
-          required: true
-          schema:
-            $ref: '#/definitions/Quote'
+      - in: "body"
+        name: "body"
+        description: "Quote body to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Quote"
       responses:
-        '400':
-          description: Invalid quote body supplied
+        400:
+          description: "Invalid quote body supplied"
   /quote/find:
     get:
       tags:
-        - quote
-      summary: Searches for quotes
-      operationId: findQuote
+      - "quote"
+      summary: "Searches for quotes"
+      operationId: "findQuote"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - in: query
-          name: query
-          description: Text to search for in the quote database
-          required: true
-          type: string
+      - in: "query"
+        name: "query"
+        description: "Text to search for in the quote database"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: "successful operation"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/Quote'
-        '400':
-          description: Invalid search query
-  '/quote/{quoteId}':
+              $ref: "#/definitions/Quote"
+        400:
+          description: "Invalid search query"
+  /quote/{quoteId}:
     get:
       tags:
-        - quote
-      summary: Find quote by ID
-      description: Returns a single quote
-      operationId: getQuoteById
+      - "quote"
+      summary: "Find quote by ID"
+      description: "Returns a single quote"
+      operationId: "getQuoteById"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - name: quoteId
-          in: path
-          description: ID of quote to return
-          required: true
-          type: integer
-          format: int64
+      - name: "quoteId"
+        in: "path"
+        description: "ID of quote to return"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: "successful operation"
           schema:
-            $ref: '#/definitions/Quote'
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Quote not found
+            $ref: "#/definitions/Quote"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Quote not found"
     delete:
       tags:
-        - quote
-      summary: Deletes a quote
-      operationId: deleteQuote
+      - "quote"
+      summary: "Deletes a quote"
+      operationId: "deleteQuote"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - name: quoteId
-          in: path
-          description: ID of quote to delete
-          required: true
-          type: integer
-          format: int64
+      - name: "quoteId"
+        in: "path"
+        description: "ID of quote to delete"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Quote not found
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Quote not found"
 definitions:
   Quote:
-    type: object
+    type: "object"
     required:
-      - body
+    - "body"
     properties:
       id:
-        type: integer
-        format: int64
+        type: "integer"
+        format: "int64"
       body:
-        type: string
+        type: "string"
       author:
-        type: string
-        format: email
+        type: "string"
+        format: "email"
       addedAt:
-        type: string
-        format: date-time
+        type: "string"
+        format: "date-time"
