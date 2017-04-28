@@ -12,11 +12,39 @@ schemes:
   - https
 paths:
   /quote:
+    get:
+      tags:
+        - quote
+      summary: Get a list of quotes in reverse chronological order
+      operationId: listQuotes
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: count
+          description: Number of quotes to fetch
+          type: number
+          format: int32
+          default: 10
+        - in: query
+          name: offset
+          description: Number of quotes to skip
+          type: number
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Quote'
+        '400':
+          description: Invalid count or offset
     post:
       tags:
         - quote
       summary: Add a new quote to the database
-      description: ''
       operationId: addQuote
       consumes:
         - application/json
