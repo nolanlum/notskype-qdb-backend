@@ -9,6 +9,7 @@ tags:
   - name: quote
     description: A quote
 schemes:
+  - http
   - https
 paths:
   /quote:
@@ -41,6 +42,10 @@ paths:
               $ref: '#/definitions/Quote'
         '400':
           description: Invalid count or offset
+        '403':
+          description: Not authorized to access QDB
+      security:
+        - GoogleSignInToken: []
     post:
       tags:
         - quote
@@ -60,6 +65,10 @@ paths:
       responses:
         '400':
           description: Invalid quote body supplied
+        '403':
+          description: Not authorized to access QDB
+      security:
+        - GoogleSignInToken: []
   /quote/find:
     get:
       tags:
@@ -83,6 +92,10 @@ paths:
               $ref: '#/definitions/Quote'
         '400':
           description: Invalid search query
+        '403':
+          description: Not authorized to access QDB
+      security:
+        - GoogleSignInToken: []
   '/quote/{quoteId}':
     get:
       tags:
@@ -106,8 +119,12 @@ paths:
             $ref: '#/definitions/Quote'
         '400':
           description: Invalid ID supplied
+        '403':
+          description: Not authorized to access QDB
         '404':
           description: Quote not found
+      security:
+        - GoogleSignInToken: []
     delete:
       tags:
         - quote
@@ -125,8 +142,17 @@ paths:
       responses:
         '400':
           description: Invalid ID supplied
+        '403':
+          description: Not authorized to access QDB
         '404':
           description: Quote not found
+      security:
+        - GoogleSignInToken: []
+securityDefinitions:
+  GoogleSignInToken:
+    type: apiKey
+    name: X-Google-Token
+    in: header
 definitions:
   Quote:
     type: object
