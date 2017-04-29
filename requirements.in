@@ -1,0 +1,14 @@
+# PIP Dependency Management that doesn't suck.
+pip-tools
+
+# Flask
+flask
+
+# Flask endpoint generation from OpenAPI spec.
+connexion
+
+# Google Sign-In token validation for AuthN.
+oauth2client
+
+# uWSGI
+uWSGI
