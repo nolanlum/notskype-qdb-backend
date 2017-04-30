@@ -2,7 +2,6 @@ import connexion
 import mongoengine
 
 import config
-from qdb import models # noqa
 
 app = connexion.App(__name__, specification_dir='swagger/')
 app.add_api('api.yaml')

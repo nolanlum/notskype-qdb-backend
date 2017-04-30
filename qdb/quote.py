@@ -1,3 +1,5 @@
+from flask import abort
+
 from qdb.models import Quote
 
 
@@ -12,12 +14,12 @@ def get_by_id(quoteId):
     try:
         return Quote.objects.get(num=quoteId).json()
     except Quote.DoesNotExist:
-        return '', 404
+        abort(404)
 
 
 def post(body):
     if not body.get('body'):
-        return '', 400
+        abort(400)
 
     quote = Quote()
     quote.author = 'test@test.com'
@@ -27,9 +29,13 @@ def post(body):
     return quote.json()
 
 
-def find():
-    pass
+def find(query):
+    quotes = Quote.objects.search_text(query)
+    return [quote.json() for quote in quotes]
 
 
 def delete(quoteId):
-    pass
+    try:
+        Quote.objects.get(num=quoteId).delete()
+    except Quote.DoesNotExist:
+        pass
