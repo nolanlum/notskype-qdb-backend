@@ -17,7 +17,7 @@ paths:
       tags:
         - quote
       summary: Get a list of quotes in reverse chronological order
-      operationId: listQuotes
+      operationId: qdb.quote.get
       produces:
         - application/json
       parameters:
@@ -50,7 +50,7 @@ paths:
       tags:
         - quote
       summary: Add a new quote to the database
-      operationId: addQuote
+      operationId: qdb.quote.post
       consumes:
         - application/json
       produces:
@@ -74,7 +74,7 @@ paths:
       tags:
         - quote
       summary: Searches for quotes
-      operationId: findQuote
+      operationId: qdb.quote.find
       produces:
         - application/json
       parameters:
@@ -102,7 +102,7 @@ paths:
         - quote
       summary: Find quote by ID
       description: Returns a single quote
-      operationId: getQuoteById
+      operationId: qdb.quote.get_by_id
       produces:
         - application/json
       parameters:
@@ -129,7 +129,7 @@ paths:
       tags:
         - quote
       summary: Deletes a quote
-      operationId: deleteQuote
+      operationId: qdb.quote.delete
       produces:
         - application/json
       parameters:
