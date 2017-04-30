@@ -98,3 +98,6 @@ runtime/
 
 # IDE
 .idea/
+
+# App-specific config
+config.py

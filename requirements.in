@@ -10,5 +10,8 @@ connexion
 # Google Sign-In token validation for AuthN.
 oauth2client
 
+# Mongo ORM
+mongoengine
+
 # uWSGI
 uWSGI

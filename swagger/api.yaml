@@ -3,7 +3,6 @@ info:
   description: This is the notskype QDB server.
   version: 1.0.0
   title: notskype qdb
-host: qdb.esports.moe
 basePath: /api/v1
 tags:
   - name: quote
