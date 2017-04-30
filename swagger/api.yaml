@@ -23,13 +23,13 @@ paths:
         - in: query
           name: count
           description: Number of quotes to fetch
-          type: number
+          type: integer
           format: int32
           default: 10
         - in: query
           name: offset
           description: Number of quotes to skip
-          type: number
+          type: integer
           format: int32
           default: 0
       responses:
@@ -62,6 +62,12 @@ paths:
           schema:
             $ref: '#/definitions/Quote'
       responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Quote'
         '400':
           description: Invalid quote body supplied
         '403':
