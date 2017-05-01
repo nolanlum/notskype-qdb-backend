@@ -1,0 +1,5 @@
+CLIENT_ID = ''
+
+AUTHORIZED_USERS = []
+
+AUTH_ENABLED = True

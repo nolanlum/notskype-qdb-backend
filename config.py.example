@@ -1,1 +1,9 @@
-MONGODB_URL = 'mongodb://localhost/notskype_qdb'
+MONGODB_URL = 'mongodb://localhost/notskype_qdb_development'
+
+CLIENT_ID = 'poop.apps.googleusercontent.com'
+
+AUTH_ENABLED = True
+
+AUTHORIZED_USERS = {
+    'you@gmail.com',
+}
