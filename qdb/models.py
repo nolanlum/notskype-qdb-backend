@@ -1,5 +1,4 @@
 from mongoengine import Document, SequenceField, StringField
-from json import dumps
 
 
 class Quote(Document):
@@ -20,9 +19,9 @@ class Quote(Document):
         return self.id.generation_time
 
     def json(self):
-        return dumps({
+        return {
             'id': self.num,
             'body': self.body,
             'author': self.author,
-            'addedAt': self.added_at.isoformat(),
-        })
+            'addedAt': self.added_at,
+        }
