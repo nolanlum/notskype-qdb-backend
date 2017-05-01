@@ -2,12 +2,10 @@ import binascii
 from functools import wraps
 
 import connexion
-from flask import abort, g, logging
+from flask import abort, g
 from oauth2client import client, crypt
 
 import qdb
-
-log = logging.getLogger(__name__)
 
 
 def google_authenticate(f):
@@ -32,7 +30,7 @@ def google_authenticate(f):
             g.user = idinfo
 
             return f(*args, **kwargs)
-        except crypt.AppIdentityError as e:
+        except crypt.AppIdentityError:
             abort(403)
         except binascii.Error:
             abort(400)
