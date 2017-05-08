@@ -74,6 +74,27 @@ paths:
           description: Not authorized to access QDB
       security:
         - GoogleSignInToken: []
+  /quote/rand:
+    get:
+      tags:
+        - quote
+      summary: Get a random quote
+      operationId: qdb.quote.rand
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Quote'
+        '403':
+          description: Not authorized to access QDB
+        '404':
+          description: No quotes exist in QDB
+      security:
+        - GoogleSignInToken: []
   /quote/find:
     get:
       tags:
