@@ -1,4 +1,4 @@
-from mongoengine import Document, SequenceField, StringField
+from mongoengine import DictField, Document, SequenceField, StringField
 
 
 class Quote(Document):
