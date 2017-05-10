@@ -13,6 +13,7 @@ class Quote(Document):
     num = SequenceField()
     author = StringField()
     body = StringField()
+    props = DictField()
 
     @property
     def added_at(self):
@@ -24,4 +25,5 @@ class Quote(Document):
             'body': self.body,
             'author': self.author,
             'addedAt': self.added_at,
+            'props': self.props,
         }
