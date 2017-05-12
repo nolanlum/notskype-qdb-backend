@@ -86,9 +86,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Quote'
+            $ref: '#/definitions/Quote'
         '403':
           description: Not authorized to access QDB
         '404':
