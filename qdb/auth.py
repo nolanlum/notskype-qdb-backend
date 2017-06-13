@@ -36,3 +36,7 @@ def google_authenticate(f):
             abort(400)
 
     return _wrapper
+
+
+def post(slack_token):
+    pass
