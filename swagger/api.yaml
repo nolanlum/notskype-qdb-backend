@@ -7,6 +7,8 @@ basePath: /api/v1
 tags:
   - name: quote
     description: A quote
+  - name: auth
+    description: AuthZ via Slack AuthN
 schemes:
   - http
   - https
@@ -172,6 +174,26 @@ paths:
           description: Quote not found
       security:
         - GoogleSignInToken: []
+  '/auth/token':
+    get:
+      tags:
+        - auth
+      summary: Issue a QDB authorization token
+      description: Request a QDB authorization token from a Slack authentication token
+      operationId: qdb.auth.post
+      produces:
+        - text/plain
+      parameters:
+        - name: slack_token
+          in: query
+          description: Authentication token from Slack
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '403':
+          description: Slack token invalid or not authorized to access QDB
 securityDefinitions:
   GoogleSignInToken:
     type: apiKey
