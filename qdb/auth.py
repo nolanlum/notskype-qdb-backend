@@ -38,5 +38,5 @@ def google_authenticate(f):
     return _wrapper
 
 
-def post(slack_token):
+def post(slack_code):
     pass
