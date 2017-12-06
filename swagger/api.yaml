@@ -8,7 +8,7 @@ tags:
   - name: quote
     description: A quote
   - name: auth
-    description: AuthZ via Slack AuthN
+    description: AuthN via Slack Sign-in
 schemes:
   - http
   - https
@@ -46,7 +46,7 @@ paths:
         '403':
           description: Not authorized to access QDB
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
     post:
       tags:
         - quote
@@ -75,7 +75,7 @@ paths:
         '403':
           description: Not authorized to access QDB
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
   /quote/rand:
     get:
       tags:
@@ -94,7 +94,7 @@ paths:
         '404':
           description: No quotes exist in QDB
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
   /quote/find:
     get:
       tags:
@@ -121,7 +121,7 @@ paths:
         '403':
           description: Not authorized to access QDB
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
   '/quote/{quoteId}':
     get:
       tags:
@@ -150,7 +150,7 @@ paths:
         '404':
           description: Quote not found
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
     delete:
       tags:
         - quote
@@ -173,31 +173,31 @@ paths:
         '404':
           description: Quote not found
       security:
-        - GoogleSignInToken: []
+        - QdbToken: []
   '/auth/token':
     get:
       tags:
         - auth
-      summary: Issue a QDB authorization token
-      description: Request a QDB authorization token from a Slack authentication token
+      summary: Issue a QDB authentication token
+      description: Request a QDB authentication token from a Slack authorization code
       operationId: qdb.auth.post
       produces:
         - text/plain
       parameters:
-        - name: slack_token
+        - name: slack_code
           in: query
-          description: Authentication token from Slack
+          description: Authorization code from Slack
           required: true
           type: string
       responses:
         '200':
           description: successful operation
         '403':
-          description: Slack token invalid or not authorized to access QDB
+          description: Slack authorization code invalid or not authorized to access QDB
 securityDefinitions:
-  GoogleSignInToken:
+  QdbToken:
     type: apiKey
-    name: X-Google-Token
+    name: X-Qdb-Token
     in: header
 definitions:
   Quote:
