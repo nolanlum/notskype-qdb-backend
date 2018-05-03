@@ -1,5 +1,9 @@
 CLIENT_ID = ''
 
-AUTHORIZED_USERS = []
+CLIENT_SECRET = ''
+
+SLACK_TEAM_ID = ''
 
 AUTH_ENABLED = True
+
+SECRET_KEY = b''

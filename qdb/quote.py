@@ -1,12 +1,12 @@
 from random import randint
 
-from flask import abort, g
+from flask import abort
 
-from qdb.auth import google_authenticate
+from qdb.auth import slack_authenticate, fetch_slack_identity
 from qdb.models import Quote
 
 
-@google_authenticate
+@slack_authenticate
 def get(count, offset):
     return [
         quote
@@ -14,7 +14,7 @@ def get(count, offset):
     ]
 
 
-@google_authenticate
+@slack_authenticate
 def get_by_id(quoteId):
     try:
         return Quote.objects.get(num=quoteId)
@@ -22,26 +22,28 @@ def get_by_id(quoteId):
         abort(404)
 
 
-@google_authenticate
+@slack_authenticate
 def post(body):
     if not body.get('body'):
         abort(400)
 
+    user = fetch_slack_identity()
+
     quote = Quote()
-    quote.author = g.user['email']
+    quote.author = user.email
     quote.body = body['body']
     quote.save()
 
     return quote
 
 
-@google_authenticate
+@slack_authenticate
 def find(query):
     quotes = Quote.objects.search_text(query).order_by('-id')
     return [quote for quote in quotes]
 
 
-@google_authenticate
+@slack_authenticate
 def rand():
     max_num_quote = Quote.objects.order_by('-num').scalar('num').first()
     if not max_num_quote:
@@ -55,7 +57,7 @@ def rand():
     return rand_quote
 
 
-@google_authenticate
+@slack_authenticate
 def delete(quoteId):
     try:
         Quote.objects.get(num=quoteId).delete()

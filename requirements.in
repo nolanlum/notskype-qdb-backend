@@ -7,11 +7,14 @@ flask
 # Flask endpoint generation from OpenAPI spec.
 connexion
 
-# Google Sign-In token validation for AuthN.
-oauth2client
-
 # Mongo ORM
 mongoengine
 
 # uWSGI
 uWSGI
+
+# HTTP for humans
+requests
+
+# Python cryptographic recipes
+cryptography

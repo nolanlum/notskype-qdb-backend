@@ -20,8 +20,9 @@ application.json_encoder = DocumentJSONEncoder
 # Pass configuration attributes to the qdb module.
 qdb.AUTH_ENABLED = config.AUTH_ENABLED
 qdb.CLIENT_ID = config.CLIENT_ID
-qdb.AUTHORIZED_USERS = config.AUTHORIZED_USERS
-
+qdb.CLIENT_SECRET = config.CLIENT_SECRET
+qdb.SLACK_TEAM_ID = config.SLACK_TEAM_ID
+qdb.SECRET_KEY = config.SECRET_KEY
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)

@@ -1,9 +1,12 @@
 MONGODB_URL = 'mongodb://localhost/notskype_qdb_development'
 
-CLIENT_ID = 'poop.apps.googleusercontent.com'
+CLIENT_ID = '1234567890.1234567890'
+
+CLIENT_SECRET = 'deadbeefcafefeed'
+
+SLACK_TEAM_ID = 'T01234567'
 
 AUTH_ENABLED = True
 
-AUTHORIZED_USERS = {
-    'you@gmail.com',
-}
+# Generate this with `from cryptography.fernet import Fernet; Fernet.generate_key()`
+SECRET_KEY = b''
