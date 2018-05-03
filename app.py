@@ -24,5 +24,11 @@ qdb.CLIENT_SECRET = config.CLIENT_SECRET
 qdb.SLACK_TEAM_ID = config.SLACK_TEAM_ID
 qdb.SECRET_KEY = config.SECRET_KEY
 
+@app.app.route('/api/healthcheck')
+def healthcheck():
+    response = app.app.make_response('ok')
+    response.mimetype = 'text/plain'
+    return response
+
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
