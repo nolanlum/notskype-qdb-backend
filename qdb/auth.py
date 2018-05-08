@@ -40,7 +40,7 @@ ANONYMOUS_USER = SlackUser(id='UANONANON', name='Anonymous', email='anonymous@es
 
 
 def fetch_slack_identity() -> SlackUser:
-    if not g.access_token:
+    if not getattr(g, 'access_token', None):
         return ANONYMOUS_USER
 
     response = requests.get(
